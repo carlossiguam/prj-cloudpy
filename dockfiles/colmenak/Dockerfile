@@ -14,13 +14,13 @@ ARG PASSNADMIN=z0phermero.$
 
 
 # Actualizamos el sistema y usamos los argumentos anteriores
-
 RUN dnf update -y && dnf install -y sudo \
     && useradd -m -s /bin/bash ${USERNADMIN} \
     && echo "${USERNADMIN}:${PASSNADMIN}" | chpasswd \
     && usermod -aG wheel ${USERNADMIN}
 
-RUN dnf install -y zsh git ncdu htop screenfetch openssl
+# Instalar utilidades para el servidor
+RUN dnf install -y zsh git ncdu htop screenfetch openssl iputils
 
 # Cambiamos al usuario por defecto
 USER ${USERNADMIN}
